@@ -31,7 +31,9 @@
 
 <script language="JavaScript" type="text/javascript">
   
-  function drawGrid(ctx, color) {
+  function drawGrid() {
+	var ctx = this.ctx
+	var color = this.gridColor
     for (var x = 0.5; x < 500; x += 10) {
       ctx.moveTo(x, 0)
       ctx.lineTo(x, 375) 
@@ -45,7 +47,10 @@
     ctx.stroke()
   }
 
-  function drawAxis(ctx, color) {
+  function drawAxis() {
+	var ctx = this.ctx
+	var color = this.axisColor
+	
     ctx.beginPath()
 
     ctx.moveTo(0, 40)
@@ -68,13 +73,15 @@
     ctx.stroke()
   }
 
-  function labelAxis(ctx, font) {
-    ctx.font = font
+  function labelAxis() {
+	var ctx = this.ctx
+    ctx.font = this.font
     ctx.fillText('x', 248, 43)
     ctx.fillText('y', 58, 165)
   }
 
-  function labelEnds(ctx) {
+  function labelEnds() {
+	var ctx = this.ctx
     ctx.textBaseline = 'top'
     ctx.fillText('( 0 , 0 )', 8, 5)
     ctx.textAlign = 'right'
@@ -96,10 +103,12 @@
   var canvas = document.getElementById('sb')
   var context = canvas.getContext('2d')
 
-  drawGrid(context, '#00f')
-  drawAxis(context, 'green')
-  labelAxis(context, 'bold 12px sans-serif')
-  labelEnds(context)
+  var graph = new Graph(context, 'bold italic 10px sans-serif', 'aquamarine', 'green')
+
+  graph.drawGrid()
+  graph.drawAxis()
+  graph.labelAxis()
+  graph.labelEnds()
 
 </script>
 
