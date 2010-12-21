@@ -82,10 +82,21 @@
     ctx.fillText('( 500 , 375 )', 492, 370)
   }
 
-	var canvas = document.getElementById('sb')
-	var context = canvas.getContext('2d')
+  function Graph(ctx, font, gridColor, axisColor) {
+	this.ctx = ctx
+	this.font = font || 'bold 12px sans-serif'
+	this.gridColor = gridColor || '#eee'
+	this.axisColor = axisColor || '#000'
+	this.drawGrid = drawGrid
+	this.drawAxis = drawAxis
+	this.labelAxis = labelAxis
+	this.labelEnds = labelEnds
+  }
 
-  drawGrid(context, 'red')
+  var canvas = document.getElementById('sb')
+  var context = canvas.getContext('2d')
+
+  drawGrid(context, '#00f')
   drawAxis(context, 'green')
   labelAxis(context, 'bold 12px sans-serif')
   labelEnds(context)
