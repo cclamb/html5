@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <title>Canvas Sandbox</title>
+  <!--[if lt IE 9]><script src="html5.js"></script><![endif]-->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header>
+
+    <hgroup>
+      <h1>Canvas Sandbox</h1>
+      <h2>An environment to work with new HTML5 technologies.</h2>
+    </hgroup>
+
+    <nav>
+      <ul>
+        <li><a href="#">reload me</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+
+  <canvas id="sb" width="800" height="800">
+  </canvas>
+
+<script language="JavaScript" type="text/javascript">
+	var sb_canvas = document.getElementById("sb")
+	var sb_context = sb_canvas.getContext("2d")
+	sb_context.fillRect(50, 25, 150, 100)
+</script>
+
+
+  <footer>
+    <p>&#167;</p>
+    <p>&copy; 2009 <a href="#">lambo</a></p>
+  </footer>
+
+</body>
+</html>
