@@ -89,8 +89,9 @@
     ctx.fillText('( 500 , 375 )', 492, 370)
   }
 
-  function Graph(ctx, font, gridColor, axisColor) {
+  function Graph(ctx, font, gridColor, axisColor, func2graph) {
 	this.ctx = ctx
+	this.func2graph = func2graph
 	this.font = font || 'bold 12px sans-serif'
 	this.gridColor = gridColor || '#eee'
 	this.axisColor = axisColor || '#000'
