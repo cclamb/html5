@@ -26,49 +26,70 @@
   </header>
 
 
-  <canvas id="sb" width="800" height="600">
+  <canvas id="sb" width="600" height="600">
   </canvas>
 
 <script language="JavaScript" type="text/javascript">
-	var canvas = document.getElementById("sb")
-	var context = canvas.getContext("2d")
+  
+  function drawGrid(ctx, color) {
+    for (var x = 0.5; x < 500; x += 10) {
+      ctx.moveTo(x, 0)
+      ctx.lineTo(x, 375) 
+    }
 
-  for (var x = 0.5; x < 500; x += 10) {
-    context.moveTo(x, 0)
-    context.lineTo(x, 375) 
+    for (var y = 0.5; y < 375; y += 10) {
+      ctx.moveTo(0, y)
+      ctx.lineTo(500, y)
+    }
+    ctx.strokeStyle = color
+    ctx.stroke()
   }
 
-  for (var y = 0.5; y < 375; y += 10) {
-    context.moveTo(0, y)
-    context.lineTo(500, y)
+  function drawAxis(ctx, color) {
+    ctx.beginPath()
+
+    ctx.moveTo(0, 40)
+    ctx.lineTo(240, 40)
+    ctx.moveTo(260, 40)
+    ctx.lineTo(500, 40)
+    ctx.moveTo(495, 35)
+    ctx.lineTo(500, 40)
+    ctx.lineTo(495, 45)
+
+    ctx.moveTo(60, 0)
+    ctx.lineTo(60, 153)
+    ctx.moveTo(60, 173)  
+    ctx.lineTo(60, 375)
+    ctx.moveTo(65, 370)
+    ctx.lineTo(60, 375)
+    ctx.lineTo(55, 370)
+
+    ctx.strokeStyle = color
+    ctx.stroke()
   }
 
-  context.strokeStyle = "#eee"
-  context.stroke()
+  function labelAxis(ctx, font) {
+    ctx.font = font
+    ctx.fillText('x', 248, 43)
+    ctx.fillText('y', 58, 165)
+  }
 
-  context.beginPath()
-  context.moveTo(0, 40)
-  context.lineTo(240, 40)
-  context.moveTo(260, 40)
-  context.lineTo(500, 40)
-  context.moveTo(495, 35)
-  context.lineTo(500, 40)
-  context.lineTo(495, 45)
+  function labelEnds(ctx) {
+    ctx.textBaseline = 'top'
+    ctx.fillText('( 0 , 0 )', 8, 5)
+    ctx.textAlign = 'right'
+    ctx.textBaseline = 'bottom'
+    ctx.fillText('( 500 , 375 )', 492, 370)
+  }
 
-  context.moveTo(60, 0)
-  context.lineTo(60, 153)
-  context.moveTo(60, 173)  
-  context.lineTo(60, 375)
-  context.moveTo(65, 370)
-  context.lineTo(60, 375)
-  context.lineTo(55, 370)
+	var canvas = document.getElementById('sb')
+	var context = canvas.getContext('2d')
 
-  context.strokeStyle = "#000"
-  context.stroke()
+  drawGrid(context, 'red')
+  drawAxis(context, 'green')
+  labelAxis(context, 'bold 12px sans-serif')
+  labelEnds(context)
 
-  context.font = "bold 12px sans-serif"
-  context.fillText("x", 248, 43)
-  context.fillText("y", 58, 165)
 </script>
 
 
