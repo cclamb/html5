@@ -2,18 +2,18 @@
 //postMessage('macaroni')
 
 onmessage = function(event) {
-	run()
+	run();
 }
 
 function run() {
-	var n = 1
+	var n = 1;
 	search: while(true) {
-		n += 1
+		n += 1;
 		for (var i = 2; i <= Math.sqrt(n); i += 1) {
 			if (n % i == 0) {
-				continue search
+				continue search;
 			}
 		}
-		postMessage(n)
+		postMessage(n);
 	}
 }

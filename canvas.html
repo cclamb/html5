@@ -36,94 +36,95 @@
 <script language="JavaScript" type="text/javascript">
   
   function drawGrid() {
-	var ctx = this.ctx
-	var color = this.gridColor
+	var ctx = this.ctx;
+	var color = this.gridColor;
     for (var x = 0.5; x < 650; x += 10) {
-      ctx.moveTo(x, 0)
-      ctx.lineTo(x, 375) 
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, 375);
     }
 
     for (var y = 0.5; y < 375; y += 10) {
-      ctx.moveTo(0, y)
-      ctx.lineTo(650, y)
+      ctx.moveTo(0, y);
+      ctx.lineTo(650, y);
     }
-    ctx.strokeStyle = color
-    ctx.stroke()
+    ctx.strokeStyle = color;
+    ctx.stroke();
   }
 
   function drawAxis() {
-	var ctx = this.ctx
-	var color = this.axisColor
+	var ctx = this.ctx;
+	var color = this.axisColor;
 	
-    ctx.beginPath()
+    ctx.beginPath();
 
-    ctx.moveTo(0, 40)
-    ctx.lineTo(240, 40)
-    ctx.moveTo(260, 40)
-    ctx.lineTo(500, 40)
-    ctx.moveTo(495, 35)
-    ctx.lineTo(500, 40)
-    ctx.lineTo(495, 45)
+    ctx.moveTo(0, 40);
+    ctx.lineTo(240, 40);
+    ctx.moveTo(260, 40);
+    ctx.lineTo(500, 40);
+    ctx.moveTo(495, 35);
+    ctx.lineTo(500, 40);
+    ctx.lineTo(495, 45);
 
-    ctx.moveTo(60, 0)
-    ctx.lineTo(60, 153)
-    ctx.moveTo(60, 173)  
-    ctx.lineTo(60, 375)
-    ctx.moveTo(65, 370)
-    ctx.lineTo(60, 375)
-    ctx.lineTo(55, 370)
+    ctx.moveTo(60, 0);
+    ctx.lineTo(60, 153);
+    ctx.moveTo(60, 173);
+    ctx.lineTo(60, 375);
+    ctx.moveTo(65, 370);
+    ctx.lineTo(60, 375);
+    ctx.lineTo(55, 370);
 
-    ctx.strokeStyle = color
-    ctx.stroke()
+    ctx.strokeStyle = color;
+    ctx.stroke();
   }
 
   function labelAxis() {
-	var ctx = this.ctx
-    ctx.font = this.font
-    ctx.fillText('x', 248, 43)
-    ctx.fillText('y', 58, 165)
+	var ctx = this.ctx;
+    ctx.font = this.font;
+    ctx.fillText('x', 248, 43);
+    ctx.fillText('y', 58, 165);
   }
 
   function labelEnds() {
-	var ctx = this.ctx
-    ctx.textBaseline = 'top'
-    ctx.fillText('( 0 , 0 )', 8, 5)
-    ctx.textAlign = 'right'
-    ctx.textBaseline = 'bottom'
-    ctx.fillText('( 500 , 375 )', 492, 370)
+	var ctx = this.ctx;
+    ctx.textBaseline = 'top';
+    ctx.fillText('( 0 , 0 )', 8, 5);
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('( 500 , 375 )', 492, 370);
   }
 
   function Graph(ctx, font, gridColor, axisColor, func2graph) {
-	this.ctx = ctx
-	this.func2graph = func2graph
-	this.font = font || 'bold 12px sans-serif'
-	this.gridColor = gridColor || '#eee'
-	this.axisColor = axisColor || '#000'
-	this.drawGrid = drawGrid
-	this.drawAxis = drawAxis
-	this.labelAxis = labelAxis
-	this.labelEnds = labelEnds
+	this.ctx = ctx;
+	this.func2graph = func2graph;
+	this.font = font || 'bold 12px sans-serif';
+	this.gridColor = gridColor || '#eee';
+	this.axisColor = axisColor || '#000';
+	this.drawGrid = drawGrid;
+	this.drawAxis = drawAxis;
+	this.labelAxis = labelAxis;
+	this.labelEnds = labelEnds;
   }
 
-  var canvas = document.getElementById('sb')
-  var context = canvas.getContext('2d')
+  var canvas = document.getElementById('sb');
+  var context = canvas.getContext('2d');
 
-  var graph = new Graph(context, 'bold italic 10px sans-serif', 'aquamarine', 'green')
+  var graph = new Graph(context, 'bold italic 10px sans-serif', 'aquamarine', 'green');
 
-  graph.drawGrid()
-  graph.drawAxis()
-  graph.labelAxis()
-  graph.labelEnds()
+  graph.drawGrid();
+  graph.drawAxis();
+  graph.labelAxis();
+  graph.labelEnds();
 
-  var worker = new Worker('prime.js')
-  prime = document.getElementById('msg')
+  var worker = new Worker('prime.js');
+  prime = document.getElementById('msg');
   worker.onmessage = function(event) {
-	prime.innerHTML = event.data
+	prime.innerHTML = event.data;
 	if (event.data > 100000) {
-		worker.terminate()
+		worker.terminate();
+    prime.innerHTML = 'Done!!!';
 	}
   }
-  worker.postMessage('start')
+  worker.postMessage('start');
 
 </script>
 
