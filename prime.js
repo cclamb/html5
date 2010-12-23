@@ -15,7 +15,6 @@ function run() {
 			}
 		}
 		postMessage(n);
-    busyWait(1000000);
 	}
 }
 

@@ -116,7 +116,9 @@
   graph.labelEnds();
 
   var worker = new Worker('prime.js');
+
   prime = document.getElementById('msg');
+
   worker.onmessage = function(event) {
 	  prime.innerHTML = event.data;
 	  if (event.data > 100000) {
@@ -124,6 +126,7 @@
       prime.innerHTML = 'Done!!!';
 	  }
   }
+
   worker.postMessage('start');
 
 </script>

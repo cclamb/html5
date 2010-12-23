@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <title>Canvas Sandbox</title>
+  <!--[if lt IE 9]><script src="html5.js"></script><![endif]-->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header>
+
+    <hgroup>
+      <h1>Canvas Sandbox</h1>
+      <h2>An environment to work with new HTML5 technologies.</h2>
+    </hgroup>
+
+    <nav>
+      <ul>
+        <li><a href="#">reload me</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+
+  <canvas id="sb" width="650" height="375">
+  </canvas>
+
+  <div style="background-color: #eee; border: 1px solid black;" id="msg" width="600" height="50">
+	&nbsp;
+  </div>
+
+<script type="text/javascript" src="messages.js"/>
+<script language="JavaScript" type="text/javascript">
+
+  var worker = new Worker('location_generator.js');
+
+  var msg = document.getElementById('msg');
+
+  worker.onmessage = function(event) {
+	
+	var msg = JSON.parse(event.data);
+	if (typeof msg == 'TextMessage') {
+		
+	}  else if (typeof msg == 'CoordinateMessage') {
+		
+	} else {
+	  msg.innerHTML = 'unexpected message type encountered; terminating.';
+	  worker.postMessage('stop');
+	}
+  }
+
+  worker.postMessage('start');
+
+</script>
+
+<input type="button" id="stopbutton" value="stop" onclick="worker.postMessage('stop');"/>
+
+  <footer>
+    <p>&#167;</p>
+    <p>&copy; 2009 <a href="#">lambo</a></p>
+  </footer>
+
+</body>
+</html>

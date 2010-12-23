@@ -16,14 +16,43 @@ body {
 	font: 100%/1 "Arial Unicode MS",FreeSerif,OpenSymbol,"DejaVu Sans",sans-serif
 }
 
-a{background:transparent;text-decoration:none;border-bottom:1px dotted}
-a:hover{border-bottom:1px solid}
-a:link{color:#1b67c9}
-a:visited{color:darkorchid}
-a.simple{border:0 !important;float:left;display:block;margin-right:20px}
-h1 a{color:inherit !important}
-h2,p{margin:1.75em 0;font-weight:normal}
-h1,h2{font-size:medium}
+a {
+	background:transparent;
+	text-decoration:none;
+	border-bottom:1px dotted;
+}
+
+a:hover {
+	border-bottom:1px solid;
+}
+
+a:link {
+	color:#1b67c9;
+}
+
+a:visited {
+	color:darkorchid;
+}
+
+a.simple {
+	border:0 !important;
+	float:left;
+	display:block;
+	margin-right:20px;
+}
+
+h1 a {
+	color:inherit !important;
+}
+
+h2,p {
+	margin:1.75em 0;
+	font-weight:normal;
+}
+
+h1, h2 {
+	font-size:medium;
+}
 
 header {
 	background-color:black;
