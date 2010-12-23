@@ -15,5 +15,10 @@ function run() {
 			}
 		}
 		postMessage(n);
+    busyWait(1000000);
 	}
+}
+
+function busyWait(n) {
+  for(var i = 0; i < n; i++ ) ;
 }

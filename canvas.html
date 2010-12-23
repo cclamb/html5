@@ -118,11 +118,11 @@
   var worker = new Worker('prime.js');
   prime = document.getElementById('msg');
   worker.onmessage = function(event) {
-	prime.innerHTML = event.data;
-	if (event.data > 100000) {
-		worker.terminate();
-    prime.innerHTML = 'Done!!!';
-	}
+	  prime.innerHTML = event.data;
+	  if (event.data > 100000) {
+		  worker.terminate();
+      prime.innerHTML = 'Done!!!';
+	  }
   }
   worker.postMessage('start');
 
