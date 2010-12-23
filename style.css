@@ -1,6 +1,6 @@
 html {
 	background: white;
-	color:black
+	color:black;
 }
 
 body {
@@ -9,7 +9,7 @@ body {
 	margin:0 auto;
 	width:40em;
 	line-height:1.75;
-	word-spacing:0.1em
+	word-spacing:0.1em;
 }
 
 .a {

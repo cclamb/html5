@@ -26,22 +26,26 @@
   </header>
 
 
-  <canvas id="sb" width="600" height="600">
+  <canvas id="sb" width="650" height="375">
   </canvas>
+
+  <div style="background-color: #eee; border: 1px solid black;" id="msg" width="600" height="50">
+	foo
+  </div>
 
 <script language="JavaScript" type="text/javascript">
   
   function drawGrid() {
 	var ctx = this.ctx
 	var color = this.gridColor
-    for (var x = 0.5; x < 500; x += 10) {
+    for (var x = 0.5; x < 650; x += 10) {
       ctx.moveTo(x, 0)
       ctx.lineTo(x, 375) 
     }
 
     for (var y = 0.5; y < 375; y += 10) {
       ctx.moveTo(0, y)
-      ctx.lineTo(500, y)
+      ctx.lineTo(650, y)
     }
     ctx.strokeStyle = color
     ctx.stroke()
@@ -110,6 +114,16 @@
   graph.drawAxis()
   graph.labelAxis()
   graph.labelEnds()
+
+  var worker = new Worker('prime.js')
+  prime = document.getElementById('msg')
+  worker.onmessage = function(event) {
+	prime.innerHTML = event.data
+	if (event.data > 100000) {
+		worker.terminate()
+	}
+  }
+  worker.postMessage('start')
 
 </script>
 
