@@ -51,7 +51,7 @@
 	  if (msg.type == TEXT) {
 		  msgPanel.innerHTML = msg.content;
 	  }  else if (msg.type == COORDS) {
-		  msgPanel.innerHTML = 'received coords';
+		  msgPanel.innerHTML = 'received coords: ' + msg.content;
 	  } else {
 	    msgPanel.innerHTML = 'unexpected message type encountered; terminating.';
 	  }
@@ -62,7 +62,7 @@
 </script>
 
 <input type="button" id="stopbutton" value="stop" 
-  onclick="worker.postMessage('stop');"/>
+  onclick="worker.terminate();msgPanel.innerHTML = 'stopped';"/>
 
   <footer>
     <p>&#167;</p>
