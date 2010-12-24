@@ -29,35 +29,40 @@
   <canvas id="sb" width="650" height="375">
   </canvas>
 
-  <div style="background-color: #eee; border: 1px solid black;" id="msg" width="600" height="50">
-	&nbsp;
+  <div style="background-color: #eee; border: 1px solid black;" 
+    id="msg" 
+    width="600" 
+    height="50">
+	  &nbsp;
   </div>
 
-<script type="text/javascript" src="messages.js"/>
 <script language="JavaScript" type="text/javascript">
+
+  var TEXT = 1;
+  var COORDS = 2;
 
   var worker = new Worker('location_generator.js');
 
-  var msg = document.getElementById('msg');
+  var msgPanel = document.getElementById('msg');
 
   worker.onmessage = function(event) {
-	
-	var msg = JSON.parse(event.data);
-	if (typeof msg == 'TextMessage') {
-		
-	}  else if (typeof msg == 'CoordinateMessage') {
-		
-	} else {
-	  msg.innerHTML = 'unexpected message type encountered; terminating.';
-	  worker.postMessage('stop');
-	}
+
+	  var msg = JSON.parse(event.data);
+	  if (msg.type == TEXT) {
+		  msgPanel.innerHTML = msg.content;
+	  }  else if (msg.type == COORDS) {
+		  msgPanel.innerHTML = 'received coords';
+	  } else {
+	    msgPanel.innerHTML = 'unexpected message type encountered; terminating.';
+	  }
   }
 
   worker.postMessage('start');
 
 </script>
 
-<input type="button" id="stopbutton" value="stop" onclick="worker.postMessage('stop');"/>
+<input type="button" id="stopbutton" value="stop" 
+  onclick="worker.postMessage('stop');"/>
 
   <footer>
     <p>&#167;</p>
