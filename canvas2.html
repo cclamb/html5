@@ -36,33 +36,47 @@
 	  &nbsp;
   </div>
 
+  <br/>
+
+  <div style="background-color: #eee; border: 1px solid black;" 
+    id="statusMsg" 
+    width="600" 
+    height="50">
+	  &nbsp;
+  </div>
+
 <script language="JavaScript" type="text/javascript">
 
   var TEXT = 1;
   var COORDS = 2;
 
-  var worker = new Worker('location_generator.js');
-
-  var msgPanel = document.getElementById('msg');
+  var worker = new Worker('thread.js');
 
   worker.onmessage = function(event) {
 
 	  var msg = JSON.parse(event.data);
-	  if (msg.type == TEXT) {
-		  msgPanel.innerHTML = msg.content;
-	  }  else if (msg.type == COORDS) {
-		  msgPanel.innerHTML = 'received coords: ' + msg.content;
-	  } else {
-	    msgPanel.innerHTML = 'unexpected message type encountered; terminating.';
-	  }
-  }
 
-  worker.postMessage('start');
+    switch(msg.type) {
+      case TEXT :
+        var msgPanel = document.getElementById('statusMsg');
+        msgPanel.innerHTML = msg.content;
+        break;
+      case COORDS :
+        var msgPanel = document.getElementById('msg');
+        msgPanel.innerHTML = 'received coords: ' + msg.content;
+        break;
+      default:
+        alert('unexpected message type encountered');
+    }
+  }
 
 </script>
 
 <input type="button" id="stopbutton" value="stop" 
-  onclick="worker.terminate();msgPanel.innerHTML = 'stopped';"/>
+  onclick="worker.postMessage('stop');"/>
+
+<input type="button" id="startbutton" value="start" 
+  onclick="worker.postMessage('start');"/>
 
   <footer>
     <p>&#167;</p>

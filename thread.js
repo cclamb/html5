@@ -1,41 +1,34 @@
-//include('messages.js');
-
-var INTERVAL = 100000000;
-var run = false;
-
 var TEXT = 1;
 var COORDS = 2;
+
+var interval;
 
 function Message(type, content) {
 	this.type = type;
   this.content = content;
 }
 
-// stop message doesn't work.  We need to spawn a worker from here, and use
-// this thread to process messages.
+function generateCoords() {
+  var x = Math.random();
+  var y = Math.random();
+  var msg = new Message(COORDS, [x, y]);
+  postMessage(JSON.stringify(msg));
+}
+
 onmessage = function(event) {
 	switch (event.data) {
 		case 'start' :
 			postMessage(JSON.stringify(new Message(TEXT, 'started')));
-      run = true;
+      timer = setInterval(generateCoords, 1);
 			break;
 		case 'stop' :
 			postMessage(JSON.stringify(new Message(TEXT, 'stopped')));
-			run = false;
+      clearInterval(interval);
+      close();
       break;
     default:
       alert('bad command');
 	}
 }
 
-function doit() {
- // while(true) {
-  //  busyWait(INTERVAL);
-  //}
-}
 
-function busyWait(n) {
-  for(var i = 0; i < n; i++ ) ;
-}
-
-doit();
