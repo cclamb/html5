@@ -55,14 +55,33 @@
 
 <script language="JavaScript" type="text/javascript">
 
-  function draw(point) {
-    
-  }
-
   var TEXT = 1;
   var COORDS = 2;
-  var COLORMAP = ['#000', '#222', '#444', '#666', '#888', '#aaa', '#ccc', 'eee'];
+  var COLORMAP = ['#000', '#222', '#444', '#666', '#888', '#aaa', '#ccc', '#eee'];
   var coords = new Array(8);
+
+  // ---
+  for (var i = 0; i < coords.length; i++) {
+    var x = Math.random() * 600;
+    var y = Math.random() * 375;
+    coords[i] = [x, y];
+  }
+  // ---
+
+  function draw(point) {
+    var canvas = document.getElementById('sb');
+    var context = canvas.getContext('2d');
+    
+    for (var i = 1; i < coords.length; i++) {
+      context.beginPath();
+      context.moveTo(coords[i - 1][0], coords[i - 1][1]);
+      context.lineTo(coords[i][0], coords[i][1]);
+      context.strokeStyle = COLORMAP[i - 1];
+      context.stroke();
+    }
+  }
+
+  draw(null);
 
   var worker = new Worker('thread.js');
 
